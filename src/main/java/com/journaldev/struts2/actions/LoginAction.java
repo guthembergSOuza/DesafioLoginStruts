@@ -1,9 +1,13 @@
 package com.journaldev.struts2.actions;
 
+import java.util.Map;
+
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Namespaces;
 import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.dispatcher.SessionMap;
+import org.apache.struts2.interceptor.SessionAware;
 
 /**
  * Notice the @Action annotation where action and result pages are declared
@@ -16,9 +20,10 @@ import org.apache.struts2.convention.annotation.Result;
 		@Result(name = "SUCCESS", location = "/welcome.jsp"),
 		@Result(name = "ERROR", location = "/error.jsp") })
 @Namespace("/")
-public class LoginAction {
-	private String name;
-	private String pwd;
+public class LoginAction  implements SessionAware{
+	private String name,pwd;
+	
+	SessionMap<String,String> sessionmap;  
 	
 	public String execute() throws Exception {
 		if("pankaj".equals(this.getName()) && "admin".equals(this.getPwd()))
@@ -43,4 +48,16 @@ public class LoginAction {
     public void setPwd(String pwd) {
         this.pwd = pwd;
     }
+
+
+	@Override
+	public void setSession(Map map) {
+		sessionmap=(SessionMap)map;  
+	    sessionmap.put("login","true");  
+	}
+	
+	public String logout(){  
+	    sessionmap.invalidate();  
+	    return "success";  
+	}  
 }
