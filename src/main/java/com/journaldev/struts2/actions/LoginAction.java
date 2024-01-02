@@ -15,28 +15,32 @@ import org.apache.struts2.convention.annotation.Result;
 @Action(value = "login", results = {
 		@Result(name = "SUCCESS", location = "/welcome.jsp"),
 		@Result(name = "ERROR", location = "/error.jsp") })
-@Namespaces(value={@Namespace("/User"),@Namespace("/")})
+@Namespace("/")
 public class LoginAction {
-
+	private String name;
+	private String pwd;
+	
 	public String execute() throws Exception {
-		if("pankaj".equals(getName()) && "admin".equals(getPwd()))
+		if("pankaj".equals(this.getName()) && "admin".equals(this.getPwd()))
 		return "SUCCESS";
 		else return "ERROR";
 	}
 	
-	//Java Bean to hold the form parameters
-	private String name;
-	private String pwd;
+	
 	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getPwd() {
-		return pwd;
-	}
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
-	}
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    // Getter e Setter para 'pwd'
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
+    }
 }

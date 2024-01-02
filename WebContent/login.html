@@ -57,44 +57,7 @@
 
         <button type="button" onclick="performLogin()">Login</button>
     </form>
-
-    <script>
-        function performLogin() {
-            var userData = {
-                name: document.getElementById("name").value,
-                pwd: document.getElementById("pwd").value
-            };
-
-            var userData = {
-                    name: name,
-                    pwd: pwd
-                };
-
-			
-			try{
-				$.ajax({
-                    type: "POST",
-                    url: "http://localhost:8080/Struts2AnnotationHelloWorld/User/login",
-                    contentType: "application/json",
-                    data: JSON.stringify(userData),
-                    success: function (response) {
-                        console.log("Resposta do servidor:", response);
-                        if (response === "SUCCESS") {
-                            // Redirecione para home.html
-                            window.location.href = "home.html";
-                        } else {
-                            // Lide com outros casos de sucesso conforme necessário
-                        }
-                    },
-                    error: function (error) {
-                        $("#error-message").text("Usuário ou senha inválidos");
-
-                    }
-                });
-			} catch(error) {
-				console.error("Erro na chamada AJAX:", error);
-			}
-        }
-    </script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="login.js"></script>
 </body>
 </html>
